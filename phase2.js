@@ -103,7 +103,7 @@
         const timer = setTimeout(() => {
           laterOutput.textContent = message;
           if (index === waitingSequence.length - 1) {
-            const revealTimer = setTimeout(finishWaiting, reducedMotion ? 0 : 240);
+            const revealTimer = setTimeout(finishWaiting, 0);
             timers.add(revealTimer);
           }
           timers.delete(timer);
