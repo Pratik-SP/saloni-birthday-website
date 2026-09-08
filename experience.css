@@ -166,6 +166,22 @@ button:disabled,
 .future-slot p { margin: 0; color: var(--muted); }
 .future-slot:not(.is-open) { filter: saturate(.35); }
 .future-slot.is-open { border-color: var(--red); }
+.future-mystery { border-style: dashed; opacity: .78; }
+.future-mystery h3 { letter-spacing: .02em; }
+.review-meta {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+  margin: 24px 0;
+}
+.review-meta > div {
+  display: grid;
+  gap: 8px;
+  padding: 14px;
+  border: 1px solid var(--rule);
+  background: rgba(0, 0, 0, .04);
+}
+.review-meta strong { font-family: var(--serif); font-size: 22px; }
 .future-grid + .btn,
 .future-grid + .console-output { margin-top: 20px; }
 .review-score { font: 11px var(--mono); color: var(--red); }
@@ -175,7 +191,8 @@ button:disabled,
   .diary-files,
   .evidence-exhibits,
   .future-grid,
-  .call-layout { grid-template-columns: 1fr; }
+  .call-layout,
+  .review-meta { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {

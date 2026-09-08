@@ -99,7 +99,11 @@
   function renderFuture() {
     const target = $('#futureMemories');
     if (!target) return;
-    target.innerHTML = content.futureMemories.map(([slot, title, status], index) => `<article class="future-slot ${state.futureReviewed ? 'is-open' : ''}"><span class="kicker">${text(slot)}</span><h3>${text(title)}</h3><p>Status: ${text(status)}.</p>${index === 6 ? '<span class="redact">[ SPECIFIC EVENT NOT INVENTED ]</span>' : ''}</article>`).join('');
+    target.innerHTML = content.futureMemories.map(([slot, title, status], index) => {
+      const mystery = index === 6;
+      const open = state.futureReviewed && !mystery;
+      return `<article class="future-slot ${open ? 'is-open' : ''} ${mystery ? 'future-mystery' : ''}" ${mystery ? 'aria-label="Locked unknown future memory" aria-disabled="true"' : ''}><span class="kicker">${text(slot)}</span><h3>${text(title)}</h3><p>${mystery ? 'STATUS: LOCKED' : 'Status: ' + text(status) + '.'}</p>${mystery ? '<span class="redact">[ SPECIFIC EVENT NOT INVENTED ]</span>' : ''}</article>`;
+    }).join('');
   }
   $('#futureButton')?.addEventListener('click', () => {
     state.futureReviewed = true;
@@ -130,7 +134,15 @@
     if (!grid) return;
     grid.innerHTML = content.reviewCategories.map(([name, score]) => `<div class="review-row"><span>${text(name)}</span><span class="review-score">${text(score)}${typeof score === 'number' ? '/100' : ''}</span></div>`).join('');
     const section = $('#review .wrap');
-    if (!section || $('#reviewButton')) return;
+    if (!section) return;
+    if (!$('#reviewMeta')) {
+      const metadata = document.createElement('div');
+      metadata.className = 'review-meta';
+      metadata.id = 'reviewMeta';
+      metadata.innerHTML = '<div><span class="kicker">REVIEWER</span><strong>SALONI</strong></div><div><span class="kicker">EMPLOYEE</span><strong>PRATIK</strong></div><div><span class="kicker">ROLE</span><strong>ELDER COUSIN BROTHER</strong></div>';
+      section.insertBefore(metadata, grid);
+    }
+    if ($('#reviewButton')) return;
     const button = document.createElement('button');
     button.className = 'btn primary';
     button.id = 'reviewButton';
