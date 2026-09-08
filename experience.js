@@ -158,6 +158,7 @@
 
   document.querySelector('#replay')?.addEventListener('click', () => {
     reset();
-    window.setTimeout(() => window.location.reload(), 80);
+    window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
+    window.setTimeout(() => window.location.reload(), reducedMotion ? 0 : 80);
   });
 })();

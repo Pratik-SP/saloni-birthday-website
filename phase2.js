@@ -99,13 +99,26 @@
     laterButton.disabled = true;
     laterButton.textContent = 'PROCESSING...';
     if (reducedMotion) {
-      finishWaiting();
+      waitingSequence.forEach((message, index) => {
+        const timer = setTimeout(() => {
+          laterOutput.textContent = message;
+          if (index === waitingSequence.length - 1) {
+            const revealTimer = setTimeout(finishWaiting, reducedMotion ? 0 : 240);
+            timers.add(revealTimer);
+          }
+          timers.delete(timer);
+        }, 0);
+        timers.add(timer);
+      });
       return;
     }
     waitingSequence.forEach((message, index) => {
       const timer = setTimeout(() => {
         laterOutput.textContent = message;
-        if (index === waitingSequence.length - 1) finishWaiting();
+        if (index === waitingSequence.length - 1) {
+          const revealTimer = setTimeout(finishWaiting, 240);
+          timers.add(revealTimer);
+        }
         timers.delete(timer);
       }, index * 360);
       timers.add(timer);
