@@ -18,6 +18,7 @@ Open `index.html` in a browser, or serve this folder locally with any static fil
 - `experience.js` - lightweight milestone and reset foundation for later phases
 - `phase2.js` - reactive Speakerphone, Waiting Room, Doju, and Facial Inspection systems
 - `phase3.js` - classified diary, family gathering, fictional calls, future memories, evidence exhibits, review, and story-layer reset logic
+- `phase4.js` - chapter navigation feedback, scroll presentation, archive metadata, and accessible photo lightbox behavior
 - `content.js` - personal content/configuration
 - `birthday-stickers.png` - custom scrapbook-style visual asset
 - `assets/photos/` - optional photo drop-in directory

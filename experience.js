@@ -66,6 +66,7 @@
     ElderBrotherAuthority.render();
     window.Phase2?.reset?.();
     window.Phase3?.reset?.();
+    window.Phase4?.reset?.();
     document.querySelectorAll('.achievement.is-revealed').forEach(card => {
       card.classList.remove('is-revealed');
       card.setAttribute('aria-expanded', 'false');
