@@ -73,6 +73,10 @@
   outline-offset: 4px;
 }
 
+:where(button, .btn):active {
+  transform: translateY(1px);
+}
+
 .cream :where(a, button, [tabindex="0"]):focus-visible,
 .acid :where(a, button, [tabindex="0"]):focus-visible {
   outline-color: var(--red);
@@ -102,4 +106,16 @@
   .reveal-target .achievement,
   .reveal-target .review-row,
   .stat .meter i { transition: none !important; }
+}
+
+button:disabled,
+.console-card button:disabled {
+  opacity: .48;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+}
+
+.console-output {
+  overflow-wrap: anywhere;
 }

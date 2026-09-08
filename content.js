@@ -14,6 +14,10 @@ window.BIRTHDAY_CONTENT = {
     reviewStatus: 'under review',
     authorityText: 'Authority: questionable. Evidence: unavailable.'
   },
+  milestones: [
+    'profile', 'audit', 'speakerphone', 'protocol', 'diary', 'waiting',
+    'doju', 'facial', 'evidence', 'achievements', 'roast', 'heartfelt'
+  ],
   photos: [
     { src: 'assets/photos/plate-incident.jpg', title: 'Case file #001 / The Plate Incident', caption: 'Subject caught eating with the plate in hand.' }
     // Add future photos below this entry.

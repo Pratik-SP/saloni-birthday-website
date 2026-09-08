@@ -1,15 +1,6 @@
 /* Phase 1 interaction foundation. Later chapters can register milestones without adding a state library. */
 (() => {
-  const milestones = [
-    'profile',
-    'audit',
-    'protocol',
-    'diary',
-    'evidence',
-    'achievements',
-    'roast',
-    'heartfelt'
-  ];
+  const milestones = window.BIRTHDAY_CONTENT.milestones;
   const state = { completed: new Set(), statsAnimated: false };
   const authorityConfig = window.BIRTHDAY_CONTENT.authority;
   const authorityState = { respectStatus: authorityConfig.respectStatus };
@@ -73,6 +64,7 @@
     state.statsAnimated = false;
     authorityState.respectStatus = authorityConfig.respectStatus;
     ElderBrotherAuthority.render();
+    window.Phase2?.reset?.();
     document.querySelectorAll('.achievement.is-revealed').forEach(card => {
       card.classList.remove('is-revealed');
       card.setAttribute('aria-expanded', 'false');
