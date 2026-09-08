@@ -8,6 +8,12 @@ window.BIRTHDAY_CONTENT = {
   age: 23,
   birthday: 'September 9, 2026',
   seniority: '1.5 years',
+  authority: {
+    role: 'elder cousin brother',
+    respectStatus: 'mandatory',
+    reviewStatus: 'under review',
+    authorityText: 'Authority: questionable. Evidence: unavailable.'
+  },
   photos: [
     { src: 'assets/photos/plate-incident.jpg', title: 'Case file #001 / The Plate Incident', caption: 'Subject caught eating with the plate in hand.' }
     // Add future photos below this entry.

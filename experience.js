@@ -11,10 +11,45 @@
     'heartfelt'
   ];
   const state = { completed: new Set(), statsAnimated: false };
+  const authorityConfig = window.BIRTHDAY_CONTENT.authority;
+  const authorityState = { respectStatus: authorityConfig.respectStatus };
   const progress = document.querySelector('.experience-progress');
   const progressFill = document.querySelector('#experienceProgressFill');
   const progressLabel = document.querySelector('#experienceProgressLabel');
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const ElderBrotherAuthority = {
+    get state() {
+      return { ...authorityConfig, ...authorityState, seniority: window.BIRTHDAY_CONTENT.seniority };
+    },
+    setRespectStatus(status) {
+      authorityState.respectStatus = status;
+      this.render();
+    },
+    respectPrompt() {
+      return 'Respect level: insufficient. Add ' + window.BIRTHDAY_CONTENT.seniority + ' and try again.';
+    },
+    render() {
+      const authority = this.state;
+      document.querySelectorAll('[data-authority-badge]').forEach((target) => {
+        target.innerHTML = '<strong>+' + authority.seniority.replace(' years', '') + '</strong> years older<br />respect ' + authority.respectStatus;
+      });
+      document.querySelectorAll('[data-authority-title]').forEach((target) => {
+        target.textContent = 'Age advantage: ' + authority.seniority + '.';
+      });
+      document.querySelectorAll('[data-authority-copy]').forEach((target) => {
+        target.textContent = authority.authorityText + ' Respect is ' + authority.respectStatus + '.';
+      });
+      document.querySelectorAll('[data-authority-footer]').forEach((target) => {
+        target.textContent = authority.seniority + ' older / respect: ' + authority.respectStatus;
+      });
+    }
+  };
+  window.ElderBrotherAuthority = ElderBrotherAuthority;
+  ElderBrotherAuthority.render();
+  document.querySelectorAll('[data-birthday-age]').forEach((target) => {
+    target.textContent = String(window.BIRTHDAY_CONTENT.age);
+  });
 
   function renderProgress() {
     const complete = state.completed.size;
@@ -36,6 +71,8 @@
   function reset() {
     state.completed.clear();
     state.statsAnimated = false;
+    authorityState.respectStatus = authorityConfig.respectStatus;
+    ElderBrotherAuthority.render();
     document.querySelectorAll('.achievement.is-revealed').forEach(card => {
       card.classList.remove('is-revealed');
       card.setAttribute('aria-expanded', 'false');
@@ -60,7 +97,10 @@
 
   Object.entries(observedSections).forEach(([selector, milestone]) => {
     const section = document.querySelector(selector);
-    if (section) section.dataset.milestone = milestone;
+    if (section) {
+      section.dataset.milestone = milestone;
+      section.querySelector(':scope > .wrap')?.setAttribute('data-milestone', milestone);
+    }
   });
 
   document.querySelectorAll('.chapter > .wrap').forEach((target) => target.classList.add('reveal-target'));
