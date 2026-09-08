@@ -1,0 +1,105 @@
+/* Phase 1 foundation styles. Content remains in index.html; these rules are reusable for later chapters. */
+.experience-progress {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 12;
+  height: 3px;
+  pointer-events: none;
+  background: rgba(242, 234, 219, .13);
+}
+
+.experience-progress span {
+  display: block;
+  width: 0;
+  height: 100%;
+  background: var(--acid);
+  transition: width .45s ease;
+}
+
+.experience-progress[data-theme="light"] span { background: var(--red); }
+
+.reveal-target {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity .65s ease, transform .65s cubic-bezier(.22, .8, .2, 1);
+}
+
+.reveal-target.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-target .card,
+.reveal-target .stat,
+.reveal-target .achievement,
+.reveal-target .review-row {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity .45s ease, transform .45s ease;
+}
+
+.reveal-target.is-visible .card,
+.reveal-target.is-visible .stat,
+.reveal-target.is-visible .achievement,
+.reveal-target.is-visible .review-row {
+  opacity: 1;
+  transform: none;
+}
+
+.reveal-target.is-visible .card:nth-child(2),
+.reveal-target.is-visible .stat:nth-child(2),
+.reveal-target.is-visible .achievement:nth-child(2),
+.reveal-target.is-visible .review-row:nth-child(2) { transition-delay: .06s; }
+
+.reveal-target.is-visible .card:nth-child(3),
+.reveal-target.is-visible .stat:nth-child(3),
+.reveal-target.is-visible .achievement:nth-child(3),
+.reveal-target.is-visible .review-row:nth-child(3) { transition-delay: .12s; }
+
+.reveal-target.is-visible .card:nth-child(4),
+.reveal-target.is-visible .stat:nth-child(4),
+.reveal-target.is-visible .achievement:nth-child(4),
+.reveal-target.is-visible .review-row:nth-child(4) { transition-delay: .18s; }
+
+.reveal-target.is-visible .card:nth-child(5),
+.reveal-target.is-visible .stat:nth-child(5),
+.reveal-target.is-visible .achievement:nth-child(5),
+.reveal-target.is-visible .review-row:nth-child(5) { transition-delay: .24s; }
+
+.stat .meter i { transition: width .9s cubic-bezier(.22, .8, .2, 1); }
+
+:where(a, button, [tabindex="0"]):focus-visible {
+  outline: 3px solid var(--acid);
+  outline-offset: 4px;
+}
+
+.cream :where(a, button, [tabindex="0"]):focus-visible,
+.acid :where(a, button, [tabindex="0"]):focus-visible {
+  outline-color: var(--red);
+}
+
+.experience-progress-label {
+  position: fixed;
+  top: 10px;
+  right: clamp(18px, 4vw, 56px);
+  z-index: 13;
+  color: var(--gray);
+  font: 9px var(--mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+@media (max-width: 600px) {
+  .experience-progress-label { top: 8px; right: 12px; font-size: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .experience-progress span,
+  .reveal-target,
+  .reveal-target .card,
+  .reveal-target .stat,
+  .reveal-target .achievement,
+  .reveal-target .review-row,
+  .stat .meter i { transition: none !important; }
+}
