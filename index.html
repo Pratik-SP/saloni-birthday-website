@@ -35,6 +35,8 @@
     .achievement.is-revealed:before{content:'case file opened';color:var(--red)}
     .achievement{padding-bottom:54px}
     .achievement.is-revealed p{padding-bottom:22px}
+    .toast{z-index:1000;will-change:transform,opacity}
+    @media(max-width:600px){.toast{left:12px;right:12px;bottom:calc(18px + env(safe-area-inset-bottom));width:auto;max-width:none;transform:translateY(28px)}.toast.show{transform:translateY(0)}}
   </style>
 </head>
 <body>
