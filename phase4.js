@@ -89,6 +89,13 @@
     trigger.textContent = 'OPEN PHOTO ARCHIVE';
     trigger.addEventListener('click', openLightbox);
     $('#plateImage')?.appendChild(trigger);
+    plateImage.addEventListener('error', () => {
+      plateImage.hidden = true;
+      trigger.disabled = true;
+      trigger.textContent = 'PHOTO UNAVAILABLE';
+      trigger.setAttribute('aria-label', 'Photo unavailable');
+      plateCard.querySelector('.archive-meta').textContent = 'PHOTO ARCHIVE / ADDITIONAL EVIDENCE PENDING';
+    }, { once: true });
     trigger.setAttribute('aria-controls', dialog.id);
     plateImage.addEventListener('click', openLightbox);
     plateImage.addEventListener('keydown', (event) => {
