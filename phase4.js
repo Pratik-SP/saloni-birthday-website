@@ -6,6 +6,25 @@
   const sections = [...document.querySelectorAll('main > .chapter')];
   const navLinks = [...document.querySelectorAll('.top-links a')];
   const state = { activeSection: '', lightboxOpen: false, lastFocus: null };
+  const chapterLabels = {
+    '#profile': '01 / Birthday alert',
+    '#stats': '02 / Character profile',
+    '#audit': '03 / Saloni audit',
+    '#speaker': '04 / Speakerphone',
+    '#doju': '05 / Doju',
+    '#facial': '06 / Facial inspection',
+    '#protocol': '07 / Family gathering protocol',
+    '#diary': '08 / Secret diary',
+    '#waiting': '09 / Waiting room',
+    '#gathering': '10 / Family gathering simulation',
+    '#calls': '11 / Fictional call log',
+    '#future': '12 / Hypothetical future memories',
+    '#locker': '13 / Evidence locker',
+    '#review': '14 / Brother performance review',
+    '#achievements': '15 / Achievements',
+    '#final': '16 / Final roast sequence',
+    '#heartfelt': '17 / No jokes for one minute'
+  };
 
   document.documentElement.classList.add('js');
 
@@ -18,7 +37,9 @@
 
   sections.forEach((section, index) => {
     section.classList.add('phase4-chapter');
-    section.dataset.chapterIndex = String(index + 1).padStart(2, '0');
+    const chapterLabel = chapterLabels['#' + section.id];
+    section.dataset.chapterIndex = chapterLabel ? chapterLabel.slice(0, 2) : '00';
+    if (chapterLabel) section.querySelector('.label')?.replaceChildren(document.createTextNode(chapterLabel));
     section.querySelector('.label')?.classList.add('phase4-reveal');
     section.querySelector('h2')?.classList.add('phase4-reveal');
   });
