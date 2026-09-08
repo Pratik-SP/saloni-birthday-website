@@ -79,7 +79,8 @@
     '3',
     '2',
     '1',
-    'DELIVERY INTERRUPTED.\nMESSAGE POSTPONED.'
+    'DELIVERY INTERRUPTED.',
+    'MESSAGE POSTPONED.'
   ];
 
   function finishWaiting() {
@@ -165,6 +166,9 @@
   window.Phase2 = {
     reset() {
       clearTimers();
+      clearTimeout(window.phase2ToastTimer);
+      const toast = $('#toast');
+      if (toast) toast.classList.remove('show');
       speakerAttempt = 0;
       waitingComplete = false;
       dojuStep = 0;
