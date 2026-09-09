@@ -72,14 +72,14 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--acid); outline-
 .mission-card.red { border-color: rgba(255, 255, 255, .24); background: var(--red); color: white; }
 .mission-card.acid { border-color: rgba(23, 23, 23, .2); background: var(--acid); color: var(--ink); }
 .mission-card.blue { background: var(--blue); color: white; }
-.mission-title { max-width: 780px; margin: 18px 0 18px; font: 700 clamp(46px, 8vw, 108px)/.84 var(--serif); letter-spacing: 0; }
-.mission-copy { max-width: 650px; color: var(--gray); line-height: 1.55; }
+.mission-title { max-width: 100%; margin: 18px 0 18px; font: 700 clamp(46px, 8vw, 108px)/.84 var(--serif); letter-spacing: 0; overflow-wrap: normal; }
+.mission-copy { max-width: 650px; color: var(--gray); line-height: 1.55; overflow-wrap: anywhere; }
 .paper .mission-copy, .acid .mission-copy { color: var(--muted); }
 .mission-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 30px; }
 .mission-status { min-height: 28px; margin-top: 22px; color: var(--acid); font: 11px/1.5 var(--mono); white-space: pre-line; }
 .paper .mission-status, .acid .mission-status { color: var(--red); }
 .completion { display: grid; gap: 16px; margin-top: 32px; padding: 24px; border-left: 3px solid var(--acid); background: rgba(223, 255, 100, .08); }
-.completion h2 { margin: 0; font: 700 clamp(34px, 5vw, 64px)/.9 var(--serif); }
+.completion h2 { max-width: 100%; margin: 0; font: 700 clamp(34px, 5vw, 64px)/.9 var(--serif); overflow-wrap: normal; }
 .completion p { margin: 0; color: var(--gray); font: 11px/1.5 var(--mono); text-transform: uppercase; }
 .paper .completion { border-color: var(--red); background: rgba(255, 77, 61, .08); }
 .achievement-toast { position: fixed; right: 24px; bottom: 24px; z-index: 30; max-width: min(360px, calc(100vw - 40px)); padding: 16px; border: 1px solid var(--black); background: var(--acid); color: var(--black); box-shadow: 6px 7px 0 rgba(0, 0, 0, .22); font: 11px/1.5 var(--mono); transform: translateY(18px); opacity: 0; pointer-events: none; transition: opacity .25s, transform .25s; }
@@ -97,7 +97,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--acid); outline-
 .file-reveal { display: none; }
 .file.open .file-reveal { display: block; }
 .question { margin-top: 28px; }
-.question h3 { max-width: 700px; margin: 0; font: 700 clamp(28px, 4vw, 52px)/.92 var(--serif); }
+.question h3 { max-width: 100%; margin: 0; font: 700 clamp(28px, 4vw, 52px)/.92 var(--serif); overflow-wrap: anywhere; }
 .question small { display: block; margin-top: 12px; color: var(--gray); font: 10px var(--mono); text-transform: uppercase; }
 .bar { height: 6px; margin-top: 14px; background: rgba(242, 234, 219, .14); }
 .bar i { display: block; height: 100%; background: var(--red); transition: width .25s; }
@@ -112,7 +112,7 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--acid); outline-
 .final-card .letter { max-width: 760px; padding: clamp(24px, 5vw, 64px); border: 1px solid var(--ink); background: var(--paper); box-shadow: 12px 13px 0 rgba(0, 0, 0, .15); transform: rotate(-.4deg); }
 .final-card .letter p { margin: 0 0 20px; font: clamp(20px, 3vw, 34px)/1.16 var(--serif); }
 .final-card .letter small { color: var(--muted); font: 10px/1.4 var(--mono); text-transform: uppercase; }
-.final-word { margin: 54px 0 0; color: var(--red); font: 700 clamp(58px, 11vw, 140px)/.8 var(--serif); letter-spacing: 0; }
+.final-word { max-width: 100%; margin: 54px 0 0; color: var(--red); font: 700 clamp(58px, 11vw, 140px)/.8 var(--serif); letter-spacing: 0; overflow-wrap: anywhere; }
 .noscript { padding: 30px; color: var(--cream); font-family: var(--sans); }
 
 @keyframes boot-load { from { transform: scaleX(0); } to { transform: scaleX(1); } }
@@ -136,11 +136,15 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--acid); outline-
   .brand { font-size: 10px; }
   .authority-mini { font-size: 8px; }
   .mission-card { min-height: 620px; padding: 24px 18px; box-shadow: 8px 9px 0 rgba(0, 0, 0, .2); }
-  .mission-title { font-size: clamp(38px, 12.5vw, 64px); }
+  .mission-title { font-size: clamp(28px, 9.7vw, 38px); }
+  .completion h2 { font-size: clamp(28px, 8vw, 44px); }
   .audit-grid, .choice-grid, .file-grid, .evidence-grid, .review-grid, .call-grid, .stat-grid { grid-template-columns: 1fr; }
   .btn { width: 100%; }
   .mission-actions .btn { width: 100%; }
   .fake-photo { max-height: 48vh; object-fit: contain; }
+}
+@media (max-width: 360px) {
+  .mission-title { font-size: 28px; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }

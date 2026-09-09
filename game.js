@@ -107,7 +107,7 @@
     panel.className = 'completion';
     panel.innerHTML = `<div class="kicker">MISSION COMPLETE</div><h2>${esc(mission.title)}</h2><p>+ MEMORY UNLOCKED<br />+ ${esc(reward)}</p><button class="btn ${last ? 'primary' : 'dark'}" id="continueMission" type="button">${last ? 'OPEN FINAL FILE' : 'CONTINUE TO MISSION ' + String(missions[next].number).padStart(2, '0')}</button>`;
     card.appendChild(panel);
-    $('#continueMission', panel).focus();
+    $('#continueMission', panel).focus({ preventScroll: true });
     $('#continueMission', panel).addEventListener('click', () => {
       if (last) { state.finalUnlocked = true; renderFinalGate(); }
       else { state.currentMission = next; renderMission(); }
@@ -120,7 +120,7 @@
     updateHud();
     mission.render();
     window.scrollTo({ top: 0, behavior: reducedMotion ? 'auto' : 'smooth' });
-    setTimeout(() => $('#missionHeading')?.focus(), reducedMotion ? 0 : 120);
+    setTimeout(() => $('#missionHeading')?.focus({ preventScroll: true }), reducedMotion ? 0 : 120);
   }
 
   function optionButton(label, value, handler) {
@@ -166,7 +166,7 @@
         const next = document.createElement('button');
         next.className = 'btn dark'; next.type = 'button'; next.textContent = index === items.length - 1 ? 'COMPLETE AUDIT' : 'NEXT AUDIT ITEM';
         next.addEventListener('click', () => { index += 1; index === items.length ? finishAudit() : showQuestion(); });
-        const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(next); card.appendChild(actions); next.focus();
+        const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(next); card.appendChild(actions); next.focus({ preventScroll: true });
       })));
     }
     function finishAudit() {
@@ -175,7 +175,7 @@
       card.querySelectorAll('.mission-actions').forEach(actions => actions.remove());
       const done = document.createElement('button'); done.className = 'btn dark'; done.type = 'button'; done.textContent = 'FILE AUDIT';
       done.addEventListener('click', () => completeMission(missions[1].reward), { once: true });
-      const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(done); card.appendChild(actions); done.focus();
+      const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(done); card.appendChild(actions); done.focus({ preventScroll: true });
     }
     showQuestion();
   }
@@ -199,7 +199,7 @@
         const next = document.createElement('button'); next.className = 'btn dark'; next.type = 'button'; next.textContent = index === rounds.length - 1 ? 'ISSUE FINAL RULING' : 'CONTINUE APPEAL';
         next.addEventListener('click', () => { index += 1; index === rounds.length ? finish() : showRound(); });
         card.querySelectorAll('.mission-actions').forEach(actions => actions.remove());
-        const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(next); card.appendChild(actions); next.focus();
+        const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(next); card.appendChild(actions); next.focus({ preventScroll: true });
       })));
     }
     function finish() {
@@ -208,7 +208,7 @@
       card.querySelectorAll('.mission-actions').forEach(actions => actions.remove());
       const done = document.createElement('button'); done.className = 'btn dark'; done.type = 'button'; done.textContent = 'ACCEPT THE RULING';
       done.addEventListener('click', () => completeMission(missions[2].reward), { once: true });
-      const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(done); card.appendChild(actions); done.focus();
+      const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(done); card.appendChild(actions); done.focus({ preventScroll: true });
     }
     showRound();
   }
@@ -226,7 +226,7 @@
         button.textContent = step === sequence.length ? 'REVEAL MESSAGE' : 'WAIT';
         if (step === sequence.length) {
           $('#missionStatus', card).textContent = 'ALL WAITING STATES PROCESSED. The suspense was the point.';
-          button.focus();
+          button.focus({ preventScroll: true });
         }
         return;
       }
@@ -262,7 +262,7 @@
     const opened = new Set();
     content.diaryEntries.forEach(([title, copy], index) => {
       const file = document.createElement('button'); file.type = 'button'; file.className = 'file'; file.innerHTML = `<span class="kicker">FILE 0${index + 1} / CLASSIFIED</span><strong>${esc(title)}</strong><span class="file-reveal">STATUS: HIGHLY CLASSIFIED<br />ACCESS LEVEL: SONUDI ONLY<br />CONTENTS: ${esc(copy)}<br />EVIDENCE: REDACTED BY BROTHER.</span>`;
-      file.addEventListener('click', () => { opened.add(index); file.classList.add('open'); file.setAttribute('aria-expanded', 'true'); if (opened.size === content.diaryEntries.length) { $('#missionStatus', card).textContent = 'SECRET DIARY UNLOCKED. Saloni remains trusted with classified information.'; finish.disabled = false; finish.focus(); } });
+      file.addEventListener('click', () => { opened.add(index); file.classList.add('open'); file.setAttribute('aria-expanded', 'true'); if (opened.size === content.diaryEntries.length) { $('#missionStatus', card).textContent = 'SECRET DIARY UNLOCKED. Saloni remains trusted with classified information.'; finish.disabled = false; finish.focus({ preventScroll: true }); } });
       grid.appendChild(file);
     });
     const finish = document.createElement('button'); finish.className = 'btn primary'; finish.type = 'button'; finish.disabled = true; finish.textContent = 'SECURE ARCHIVE'; contentNode.appendChild(finish);
@@ -287,10 +287,10 @@
         const next = document.createElement('button'); next.className = 'btn dark'; next.type = 'button'; next.textContent = index === prompts.length - 1 ? 'CLOSE CALL LOG' : 'NEXT CALL DETAIL';
         next.addEventListener('click', () => { index += 1; index === prompts.length ? finish() : showPrompt(); });
         card.querySelectorAll('.mission-actions').forEach(actions => actions.remove());
-        const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(next); card.appendChild(actions); next.focus();
+        const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(next); card.appendChild(actions); next.focus({ preventScroll: true });
       })));
     }
-    function finish() { contentNode.innerHTML = '<div class="terminal">CALLS INITIATED BY PRATIK: 87%\nSALONI: CLASSIFIED\nAVERAGE TOPICS: ABSURD\n"OKAY, ONE LAST THING..." COUNT: UNREASONABLE\n\nFINAL RESULT: THERE WAS NEVER JUST ONE THING.</div>'; card.querySelectorAll('.mission-actions').forEach(actions => actions.remove()); const done = document.createElement('button'); done.className = 'btn dark'; done.type = 'button'; done.textContent = 'FILE CALL LOG'; done.addEventListener('click', () => completeMission(missions[6].reward), { once: true }); const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(done); card.appendChild(actions); done.focus(); }
+    function finish() { contentNode.innerHTML = '<div class="terminal">CALLS INITIATED BY PRATIK: 87%\nSALONI: CLASSIFIED\nAVERAGE TOPICS: ABSURD\n"OKAY, ONE LAST THING..." COUNT: UNREASONABLE\n\nFINAL RESULT: THERE WAS NEVER JUST ONE THING.</div>'; card.querySelectorAll('.mission-actions').forEach(actions => actions.remove()); const done = document.createElement('button'); done.className = 'btn dark'; done.type = 'button'; done.textContent = 'FILE CALL LOG'; done.addEventListener('click', () => completeMission(missions[6].reward), { once: true }); const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(done); card.appendChild(actions); done.focus({ preventScroll: true }); }
     showPrompt();
   }
 
@@ -339,7 +339,7 @@
     card.innerHTML = '<div class="eyebrow">ALL MISSIONS COMPLETE / 09 OF 09</div><h1 class="mission-title" id="finalHeading">ONE FINAL FILE REMAINS.</h1><p class="mission-copy">SALONI.EXE STATUS: COMPLETE. The system has one last message, and this time Pratik is not allowed to interrupt it.</p><button class="btn primary" id="openFinal" type="button">OPEN FINAL FILE</button>';
     stage.replaceChildren(card); state.currentMission = missions.length; state.finalUnlocked = true; updateHud();
     $('#openFinal', card).addEventListener('click', renderFinal, { once: true });
-    $('#openFinal', card).focus();
+    $('#openFinal', card).focus({ preventScroll: true });
   }
 
   function renderFinal() {
@@ -349,7 +349,7 @@
     card.innerHTML = `<div class="eyebrow">FINAL FILE / NO MORE GAMES</div><div class="letter"><h1 id="heartfeltHeading" class="hidden">Happy 23rd, Sonu.</h1><p>Okay, Sonu. Enough bullying for one day.</p><p>You are one of those people I know I can always rely on. I can tell you things I do not tell anyone else, dump all my ridiculous thoughts on you, and somehow you still listen without judging me.</p><p>You give me advice, bring me back to reality, and tolerate a truly unreasonable amount of nonsense. And the funniest part is that you cannot keep your mouth shut for five minutes, but you have always managed to keep the things I trusted you with. I genuinely appreciate that.</p><p>I hope 23 brings you happiness, confidence in yourself, success in everything you want to accomplish, and plenty of chances to actually have fun. We should stop waiting for family gatherings to meet and actually go somewhere and make some memories.</p><p>Even if Pratik were somehow sitting on the moon, you could still call and dump your stupid talks on him. He would listen. He will always be there, and unfortunately, he will always be there to annoy you too.</p><small>With love, respect under review, and permanent elder-cousin authority.</small></div><div class="final-word">Happy 23rd,<br />Sonu.</div><button class="btn dark" id="replayGame" type="button">REPLAY THE NONSENSE</button>`;
     stage.replaceChildren(card);
     $('#replayGame', card).addEventListener('click', resetGame, { once: true });
-    $('#replayGame', card).focus();
+    $('#replayGame', card).focus({ preventScroll: true });
   }
 
   function resetGame() {
