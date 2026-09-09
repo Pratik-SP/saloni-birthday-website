@@ -13,12 +13,11 @@ Open `index.html` in a browser, or serve this folder locally with any static fil
 
 ## Included
 
-- `index.html` - responsive interactive birthday experience
-- `experience.css` - reusable progress, reveal, focus, and reduced-motion styles
-- `experience.js` - lightweight milestone and reset foundation for later phases
-- `phase2.js` - reactive Speakerphone, Waiting Room, Doju, and Facial Inspection systems
-- `phase3.js` - classified diary, family gathering, fictional calls, future memories, evidence exhibits, review, and story-layer reset logic
-- `phase4.js` - chapter navigation feedback, scroll presentation, archive metadata, and accessible photo lightbox behavior
-- `content.js` - personal content/configuration
-- `birthday-stickers.png` - custom scrapbook-style visual asset
-- `assets/photos/` - optional photo drop-in directory
+- `index.html` - static game shell and accessible boot screen
+- `game.js` - the central in-memory nine-mission engine, progression, achievements, reset, and final-file unlock
+- `game.css` - responsive classified-game visual system with reduced-motion support
+- `content.js` - personal content/configuration kept separate from game logic
+- `birthday-stickers.png` - retained project artwork
+- `assets/photos/` - real photo assets used by the Evidence Locker
+
+The old phase scripts are no longer part of the active runtime. Their behavior was consolidated into `game.js` so mission progression has one state owner and locked missions cannot be skipped.
