@@ -155,6 +155,8 @@
     let index = 0;
     function showQuestion() {
       const item = items[index];
+      card.querySelectorAll('.mission-actions').forEach(actions => actions.remove());
+      $('#missionStatus', card).textContent = `AUDIT ITEM ${index + 1} READY`;
       contentNode.innerHTML = `<div class="question"><small>AUDIT ITEM ${index + 1} / ${items.length}</small><h3>${esc(item[0])}</h3><div class="choice-grid" id="auditChoices"></div></div>`;
       item[2].forEach(value => $('#auditChoices', contentNode).appendChild(optionButton(value, 'Select the official value', () => {
         $('#auditChoices', contentNode).querySelectorAll('button').forEach(button => { button.disabled = true; });
@@ -164,7 +166,6 @@
         const next = document.createElement('button');
         next.className = 'btn dark'; next.type = 'button'; next.textContent = index === items.length - 1 ? 'COMPLETE AUDIT' : 'NEXT AUDIT ITEM';
         next.addEventListener('click', () => { index += 1; index === items.length ? finishAudit() : showQuestion(); });
-        $('.mission-actions', card)?.remove();
         const actions = document.createElement('div'); actions.className = 'mission-actions'; actions.appendChild(next); card.appendChild(actions); next.focus();
       })));
     }
